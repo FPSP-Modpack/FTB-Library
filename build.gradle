@@ -1,11 +1,11 @@
-def project_dir = "/home/jason/dev/mc/ftb/FTB-Library"
+def project_dir = "C:/MINECRAFT/dev/1.7.10/FTB-Library/"
 
 buildscript {
     repositories {
         mavenCentral()
         maven {
-            name = "gt"
-            url = "https://gregtech.overminddl1.com/"
+            name = "forge"
+            url = "https://maven.minecraftforge.net/"
         }
         maven {
             name = "sonatype"
@@ -30,6 +30,7 @@ file "build.properties" withReader {
 //def version_mod = version_mods;
 def version_mc = "${config.version_mc}"
 def version_mod = "${config.version_mc}-${config.version_mod}"
+version = version_mod
 group = "latmod.ftblib"
 archivesBaseName = "FTBLib"
 

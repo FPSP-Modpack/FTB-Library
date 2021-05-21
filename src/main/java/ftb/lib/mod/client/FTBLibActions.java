@@ -1,25 +1,36 @@
 package ftb.lib.mod.client;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ftb.lib.EventBusHelper;
 import ftb.lib.api.PlayerAction;
-import ftb.lib.api.client.*;
+import ftb.lib.api.client.FTBLibClient;
+import ftb.lib.api.client.GlStateManager;
 import ftb.lib.api.config.ClientConfigRegistry;
 import ftb.lib.api.friends.ILMPlayer;
-import ftb.lib.api.gui.*;
+import ftb.lib.api.gui.GuiIcons;
+import ftb.lib.api.gui.GuiLM;
+import ftb.lib.api.gui.GuiScreenRegistry;
+import ftb.lib.api.gui.PlayerActionRegistry;
 import ftb.lib.api.notification.ClientNotifications;
 import ftb.lib.mod.FTBLibMod;
-import ftb.lib.mod.client.gui.*;
+import ftb.lib.mod.client.gui.GuiEditConfig;
+import ftb.lib.mod.client.gui.GuiNotifications;
+import ftb.lib.mod.config.FTBLibConfigCompat;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.GuiScreenEvent;
-import org.lwjgl.opengl.GL11;
-
-import java.util.*;
 
 @SideOnly(Side.CLIENT)
 public class FTBLibActions
@@ -102,6 +113,10 @@ public class FTBLibActions
 					buttonY = 6;
 				}
 				boolean hasPotions = !e.gui.mc.thePlayer.getActivePotionEffects().isEmpty();
+				
+				if(FTBLibConfigCompat.compat_statusEffectHUD.getAsBoolean())
+					hasPotions = false;
+				
 				if(hasPotions)
 				{
 					buttonX -= 64;
